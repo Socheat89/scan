@@ -133,6 +133,28 @@ This project is easiest to deploy on cPanel using:
 
 If your cPanel account **does not** have “Setup Node.js App”, you can still host the two frontends on cPanel, but you’ll need to run the backend somewhere else (VPS / Render / Railway / etc.).
 
+### If you cannot create subdomains (single domain)
+
+If your hosting only allows **one domain** (no subdomains), use a **path-based** layout:
+
+- Employee app (PWA): `https://YOUR_DOMAIN/`
+- Admin app: `https://YOUR_DOMAIN/admin/`
+- API: either
+	- run it somewhere else (recommended on shared hosting), and set `VITE_API_URL` to that external URL, OR
+	- if your cPanel supports “Setup Node.js App” on a path, mount it at `https://YOUR_DOMAIN/api/`.
+
+Admin build requirements for `/admin/`:
+
+- Set `VITE_BASE_PATH=/admin/` when building the admin frontend.
+- The codebase is updated to respect Vite’s `BASE_URL` so routing + redirects work under `/admin/`.
+
+In backend env vars (CORS), both origins are the same domain:
+
+```env
+ADMIN_FRONTEND_URL=https://YOUR_DOMAIN
+USER_FRONTEND_URL=https://YOUR_DOMAIN
+```
+
 ### 1) Create a MySQL database in cPanel
 
 In **MySQL® Databases**:
@@ -186,6 +208,7 @@ The admin app reads the API URL at **build time**.
 
 ```env
 VITE_API_URL=https://api.yourdomain.com/api
+VITE_BASE_PATH=/admin/
 ```
 
 2. Build locally:
@@ -198,6 +221,10 @@ npm run build
 
 3. Upload the contents of `admin-frontend/dist/` to the document root of your admin site, for example:
 	- subdomain `admin.yourdomain.com` → its docroot folder
+
+If you are using a single-domain layout, upload `admin-frontend/dist/` into a folder named `admin` under your main site’s docroot:
+
+- `public_html/admin/` (URL becomes `https://YOUR_DOMAIN/admin/`)
 
 4. Add an `.htaccess` in that docroot so React Router routes work on refresh:
 

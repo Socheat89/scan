@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+const appBase = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
 })
@@ -16,7 +18,7 @@ api.interceptors.response.use(
     if (err.response?.status === 401) {
       localStorage.removeItem('admin_user')
       localStorage.removeItem('admin_token')
-      window.location.href = '/login'
+      window.location.href = `${appBase}login`
     }
     return Promise.reject(err)
   }
