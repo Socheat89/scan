@@ -153,6 +153,9 @@ In backend env vars (CORS), both origins are the same domain:
 ```env
 ADMIN_FRONTEND_URL=https://YOUR_DOMAIN
 USER_FRONTEND_URL=https://YOUR_DOMAIN
+
+# If you mount the Node app at /api in cPanel:
+API_PREFIX=
 ```
 
 ### 1) Create a MySQL database in cPanel
