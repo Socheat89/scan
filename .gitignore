@@ -5,6 +5,11 @@
 **/dist/
 **/build/
 
+# Deployment artifacts
+**/dist.zip
+**/*-deploy.zip
+**/*.rar
+
 # Vite / tooling caches
 **/.vite/
 **/.cache/
