@@ -1,0 +1,11 @@
+const router=require('express').Router();
+const ctrl=require('../controllers/branchController');
+const auth=require('../middleware/auth');
+const req_role=require('../middleware/roleCheck');
+router.get('/',auth,req_role('admin'),ctrl.getAll);
+router.get('/:id',auth,req_role('admin'),ctrl.getOne);
+router.post('/',auth,req_role('admin'),ctrl.create);
+router.put('/:id',auth,req_role('admin'),ctrl.update);
+router.delete('/:id',auth,req_role('admin'),ctrl.remove);
+router.get('/:id/qr',auth,req_role('admin'),ctrl.getQR);
+module.exports=router;

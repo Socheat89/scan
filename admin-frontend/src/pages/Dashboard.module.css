@@ -1,0 +1,261 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: -0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+.dateIcon {
+  color: var(--primary);
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-2);
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.actionBtn:hover {
+  background: var(--bg);
+  color: var(--primary);
+  border-color: var(--primary-light);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.value {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--text-1);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.cardIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-4);
+  font-weight: 500;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.trendIcon {
+  color: var(--success);
+}
+
+.chartsSection {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.chartCard {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+.chartTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 1.5rem;
+}
+
+.chartPlaceholder {
+  height: 240px;
+  display: flex;
+  align-items: flex-end;
+  padding-top: 2rem;
+}
+
+.barContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  gap: 1rem;
+}
+
+.barWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  height: 100%;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.bar {
+  width: 100%;
+  max-width: 48px;
+  background: var(--primary);
+  border-radius: 4px 4px 0 0;
+  transition: height 0.5s ease-out;
+  opacity: 0.8;
+}
+
+.bar:hover {
+  opacity: 1;
+}
+
+.barLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.activityItem {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+}
+
+.activityItem:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 16px;
+  bottom: -16px;
+  width: 2px;
+  background: var(--border);
+}
+
+.activityDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 0 2px var(--primary-light);
+  margin-top: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.activityContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.activityText {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-1);
+}
+
+.activityTime {
+  font-size: 0.75rem;
+  color: var(--text-4);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  font-size: 1.125rem;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .chartsSection {
+    grid-template-columns: 1fr;
+  }
+}

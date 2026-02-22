@@ -1,0 +1,16 @@
+.shell {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 0 40px rgba(0,0,0,0.06);
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 68px;
+}

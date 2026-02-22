@@ -1,0 +1,11 @@
+const router=require('express').Router();
+const ctrl=require('../controllers/attendanceController');
+const auth=require('../middleware/auth');
+const req_role=require('../middleware/roleCheck');
+router.post('/scan',auth,req_role('employee'),ctrl.scan);
+router.get('/my',auth,req_role('employee'),ctrl.myAttendance);
+router.get('/dashboard',auth,req_role('admin'),ctrl.dashboard);
+router.get('/report',auth,req_role('admin'),ctrl.report);
+router.get('/settings',auth,ctrl.getSettings);
+router.put('/settings',auth,req_role('admin'),ctrl.updateSettings);
+module.exports=router;

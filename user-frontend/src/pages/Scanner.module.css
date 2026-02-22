@@ -1,0 +1,195 @@
+.page {
+  height: 100vh;
+  width: 100vw;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  color: white;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.iconBtn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+
+.iconBtn:active {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.flashActive {
+  background: var(--warning);
+  color: #000;
+}
+
+.scannerContainer {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.reader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reader video {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.frame {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.cornerTopLeft, .cornerTopRight, .cornerBottomLeft, .cornerBottomRight {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-color: var(--primary);
+  border-style: solid;
+}
+
+.cornerTopLeft {
+  top: 0;
+  left: 0;
+  border-width: 4px 0 0 4px;
+  border-top-left-radius: 16px;
+}
+
+.cornerTopRight {
+  top: 0;
+  right: 0;
+  border-width: 4px 4px 0 0;
+  border-top-right-radius: 16px;
+}
+
+.cornerBottomLeft {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 4px 4px;
+  border-bottom-left-radius: 16px;
+}
+
+.cornerBottomRight {
+  bottom: 0;
+  right: 0;
+  border-width: 0 4px 4px 0;
+  border-bottom-right-radius: 16px;
+}
+
+.instruction {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(4px);
+}
+
+.statusOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  backdrop-filter: blur(4px);
+}
+
+.statusCard {
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  width: 80%;
+  max-width: 320px;
+  box-shadow: var(--shadow-md);
+}
+
+.statusCard p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.spinner {
+  color: var(--primary);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.retryBtn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  width: 100%;
+}
