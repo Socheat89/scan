@@ -13,15 +13,15 @@ async function columnExists(tableName, columnName) {
 }
 
 async function initializeDatabase() {
-  const DB = process.env.DB_NAME || 'attendance_system';
+  const DB = process.env.DB_NAME || 'mekongcy_attendance_system';
   const autoCreateDb = String(process.env.DB_AUTO_CREATE ?? 'true').toLowerCase() === 'true';
 
   if (autoCreateDb) {
     const rootConn = await mysql.createConnection({
-      host:     process.env.DB_HOST     || 'localhost',
+      host:     process.env.DB_HOST     || 's12904.sgp1.stableserver.net',
       port:     parseInt(process.env.DB_PORT || '3306'),
-      user:     process.env.DB_USER     || 'root',
-      password: process.env.DB_PASSWORD || ''
+      user:     process.env.DB_USER     || 'mekongcy',
+      password: process.env.DB_PASSWORD || 'Socheat!@#$2026'
     });
 
     try {
