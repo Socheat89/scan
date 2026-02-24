@@ -16,38 +16,46 @@ async function initializeDatabase() {
   const DB = process.env.DB_NAME || 'mekongcy_attendance_system';
   const autoCreateDb = String(process.env.DB_AUTO_CREATE ?? 'true').toLowerCase() === 'true';
 
-  if (autoCreateDb) {
-    const rootConn = await mysql.createConnection({
-      host:     process.env.DB_HOST     || 's12904.sgp1.stableserver.net',
-      port:     parseInt(process.env.DB_PORT || '3306'),
-      user:     process.env.DB_USER     || 'mekongcy',
-      password: process.env.DB_PASSWORD || 'Socheat!@#$2026'
+  console.log(`Initializing database. DB=${DB} host=${process.env.DB_HOST || 'localhost'} autoCreate=${autoCreateDb}`);
+
+  try {
+    if (autoCreateDb) {
+      const rootConn = await mysql.createConnection({
+        host:     process.env.DB_HOST     || 's12904.sgp1.stableserver.net',
+        port:     parseInt(process.env.DB_PORT || '3306'),
+        user:     process.env.DB_USER     || 'mekongcy',
+        password: process.env.DB_PASSWORD || 'Socheat!@#$2026'
+      });
+
+      try {
+        await rootConn.query(`CREATE DATABASE IF NOT EXISTS \`${DB}\``);
+        console.log(`Database checked/created: ${DB}`);
+      } catch (err) {
+        console.warn(
+          `Warning: could not auto-create database "${DB}". ` +
+          `Create it manually (e.g. in cPanel) or set DB_AUTO_CREATE=false.`,
+          err?.code ? `(${err.code})` : err
+        );
+      } finally {
+        await rootConn.end();
+      }
+    }
+
+    pool = mysql.createPool({
+      host:               process.env.DB_HOST     || 'localhost',
+      port:               parseInt(process.env.DB_PORT || '3306'),
+      user:               process.env.DB_USER     || 'root',
+      password:           process.env.DB_PASSWORD || '',
+      database:           DB,
+      waitForConnections: true,
+      connectionLimit:    10
     });
 
-    try {
-      await rootConn.query(`CREATE DATABASE IF NOT EXISTS \`${DB}\``);
-    } catch (err) {
-      console.warn(
-        `Warning: could not auto-create database "${DB}". ` +
-        `Create it manually (e.g. in cPanel) or set DB_AUTO_CREATE=false.`,
-        err?.code ? `(${err.code})` : err
-      );
-    } finally {
-      await rootConn.end();
-    }
-  }
+    // Quick test connection so errors surface immediately in logs
+    const [test] = await pool.query('SELECT 1');
+    console.log('Database connection successful. Ready to run migrations.');
 
-  pool = mysql.createPool({
-    host:               process.env.DB_HOST     || 'localhost',
-    port:               parseInt(process.env.DB_PORT || '3306'),
-    user:               process.env.DB_USER     || 'root',
-    password:           process.env.DB_PASSWORD || '',
-    database:           DB,
-    waitForConnections: true,
-    connectionLimit:    10
-  });
-
-  await pool.query(`CREATE TABLE IF NOT EXISTS branches (
+    await pool.query(`CREATE TABLE IF NOT EXISTS branches (
     id         INT          NOT NULL AUTO_INCREMENT,
     name       VARCHAR(150) NOT NULL,
     location   VARCHAR(255) NOT NULL,
@@ -55,6 +63,7 @@ async function initializeDatabase() {
     created_at TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
   ) ENGINE=InnoDB`);
+    
 
   // ── Work Schedules ────────────────────────────────────────────────────────
   await pool.query(`CREATE TABLE IF NOT EXISTS work_schedules (
